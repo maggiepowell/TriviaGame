@@ -1,6 +1,5 @@
 body {
     background-image: url("../images/sprinkles.png");
-    background-repeat: repeat-y;
-    background-position: 0;
+    background-repeat: repeat;
     background-attachment: fixed;
 }
