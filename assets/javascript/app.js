@@ -1,3 +1,6 @@
+var time
+var window
+
 window.onload = function() {
     $("#start").on("click", start);
   };
@@ -9,5 +12,5 @@ window.onload = function() {
 
   function count() {
 
-    time++;
+    time--;
   }
