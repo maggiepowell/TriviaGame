@@ -1,7 +1,6 @@
 header {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Rye', cursive;
     font-size: 72px;
-    font-weight: bolder;
     color: white;
     text-align: center;
     margin: 25px;
@@ -10,7 +9,7 @@ header {
 body {
     background-image: url("../images/sprinkles.jpg");
     background-attachment: fixed;
-    background-position: 0;
+    background-size: cover;
 }
 
 #start {
@@ -18,9 +17,9 @@ body {
 }
 .question {
     font-size: 24px;
-    color: rgb(137, 178, 255);
+    color: rgb(234, 240, 250);
     background-color: rgb(224, 146, 243);
-    font-family: 'Space Mono', monospace;
+    font-family: 'Oswald', sans-serif;
     text-align: center;
     padding: 20px;
 }
