@@ -1,5 +1,6 @@
 //on page load have start button visible
-//once start button is clicked have times for 20 seconds and question appear with three clickable answer choices
+
+//once start button is clicked have timer for 20 seconds and question appear with clickable answer choices
 
 $("#start").click( function(){
   var counter = 20;
@@ -19,6 +20,9 @@ $("#start").click( function(){
 
   //hide start button once clicked
   $('#start').addClass('hide');
+
+  //call question to appear
+  $('#question').html(icecreamQuestion[0].question);
 });
 
 var icecreamQuestion = [{
