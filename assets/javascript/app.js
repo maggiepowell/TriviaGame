@@ -10,7 +10,7 @@ $("#start").click( function(){
     counter--;
      if (counter >= 0) {
         span = document.getElementById("timer");
-        span.innerHTML = counter;
+        span.innerHTML = counter + " seconds left!";
      }
      if (counter === 0) {
         alert('Sorry, out of time!');
@@ -21,8 +21,12 @@ $("#start").click( function(){
   //hide start button once clicked
   $('#start').addClass('hide');
 
-  //call question to appear
-  $('#question').html(icecreamQuestion[0].question);
+  //call question and answer array to appear
+  $('#question').html(icecreamQuestion[0].question) 
+    for(var i=0; i < icecreamQuestion[0].choices.length ; i++) {
+      $('#answer' + i).html(icecreamQuestion[0].choices[i])
+    console.log("test")
+  };
 });
 
 var icecreamQuestion = [{
@@ -41,8 +45,8 @@ var icecreamQuestion = [{
     validAnswer: 1
   },
   {
-    question:"Which flavor came first, chocolate or vanilla?",
-    choices:["Chocolate", "Vanilla"],
+    question:"Which flavor came first?",
+    choices:["Chocolate", "Vanilla", "Pistachio", "Strawberry"],
     validAnswer: 0
     },
   {
@@ -52,7 +56,7 @@ var icecreamQuestion = [{
     },
   {
     question:"What do food stylists typically use to represent ice cream in advertising campaigns?",
-    choices:["Cream Cheese", "Yogurt", "Mashed Potatoes"],
+    choices:["Cream Cheese", "Yogurt", "Mashed Potatoes", "Play-Doh"],
     validAnswer: 2
 }]
 //if correct answer is clicked alert "correct!" plus gif for three seconds before next question appears
