@@ -15,11 +15,15 @@ body {
 #start {
     margin: 50px;
 }
-.question {
+.content {
     font-size: 24px;
     color: rgb(234, 240, 250);
     background-color: rgb(224, 146, 243);
     font-family: 'Oswald', sans-serif;
     text-align: center;
     padding: 20px;
+}
+
+.hide {
+    display: none;
 }
