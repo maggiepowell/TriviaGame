@@ -6,7 +6,7 @@ $("#start").click( function(){
   var counter = 20;
   var seconds = Math.floor((counter % (1000 * 60)) / 1000);
 
-  setInterval(function() {
+  var timer = setInterval(function() {
     counter--;
      if (counter >= 0) {
         span = document.getElementById("timer");
@@ -27,37 +27,52 @@ $("#start").click( function(){
       $('#answer' + i).html(icecreamQuestion[0].choices[i])
     console.log("test")
   };
+
+  //listen for answer selection and alert appropriate response
+  $('button').click(function() {
+    var clickedButton = $(this).val();
+    console.log(clickedButton);
+    console.log(icecreamQuestion[0].correctAnswer);
+
+    if (clickedButton == icecreamQuestion[0].correctAnswer) {
+      clearInterval(timer);
+      setInterval(function() {
+        $('#question').html(
+          "You are correct!");
+      }, 3000);
+    }
+  });
 });
 
 var icecreamQuestion = [{
     question:"What year was the ice cream cone invented?",
     choices:["1904", "1905", "1914", "1915"],
-    validAnswer: 0
+    correctAnswer: 0
   },
   {
     question:"What country consumed more ice cream per person last year?",
     choices:["USA", "China", "Germany", "New Zealand"],
-    validAnswer: 3
+    correctAnswer: 3
   },
   {
     question:"How many gallons of milk does it take to make one gallon of ice cream?",
     choices:["Two", "Three", "Four", "Ten"],
-    validAnswer: 1
+    correctAnswer: 1
   },
   {
     question:"Which flavor came first?",
     choices:["Chocolate", "Vanilla", "Pistachio", "Strawberry"],
-    validAnswer: 0
+    correctAnswer: 0
     },
   {
     question:"What is a professional ice cream tasting spoon typically made of?",
     choices:["Gold", "Platinum", "Mother of Pearl", "Wood"],
-    validAnswer: 0
+    correctAnswer: 0
     },
   {
     question:"What do food stylists typically use to represent ice cream in advertising campaigns?",
     choices:["Cream Cheese", "Yogurt", "Mashed Potatoes", "Play-Doh"],
-    validAnswer: 2
+    correctAnswer: 2
 }]
 //if correct answer is clicked alert "correct!" plus gif for three seconds before next question appears
 
