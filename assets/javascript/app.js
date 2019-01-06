@@ -35,10 +35,17 @@ $("#start").click( function(){
     console.log(icecreamQuestion[0].correctAnswer);
 
     if (clickedButton == icecreamQuestion[0].correctAnswer) {
+      //stop timer
       clearInterval(timer);
+      //hide timer
+      $('#timer').addClass('hide');
+      //change screen to say "You are correct!"
+      $('#question').html(
+        "You are correct!");
+      
+        //load next question after 3 seconds
       setInterval(function() {
-        $('#question').html(
-          "You are correct!");
+        var loadNextQuestion = 
       }, 3000);
     }
   });
