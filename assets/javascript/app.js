@@ -1,7 +1,4 @@
 //on page load have start button visible
-
-//once start button is clicked have timer for 20 seconds and question appear with clickable answer choices
-
 $("#start").click( function(){
   var counter = 20;
   var seconds = Math.floor((counter % (1000 * 60)) / 1000);
@@ -17,39 +14,57 @@ $("#start").click( function(){
         clearInterval(counter);
       }
     }, 1000);
-
   //hide start button once clicked
   $('#start').addClass('hide');
 
   //call question and answer array to appear
-  $('#question').html(icecreamQuestion[0].question) 
+  loadQuestion(); 
+  });
+
+  //call question and answer array to appear
+  var currentQ = 0
+
+  var loadQuestion = function () {
+    $('#question').html(icecreamQuestion[currentQ].question) 
     for(var i=0; i < icecreamQuestion[0].choices.length ; i++) {
-      $('#answer' + i).html(icecreamQuestion[0].choices[i])
+      $('#answer' + i).html(icecreamQuestion[currentQ].choices[i])
     console.log("test")
+    }
   };
 
   //listen for answer selection and alert appropriate response
-  $('button').click(function() {
+  $("button[id^='answer']").click(function() {
     var clickedButton = $(this).val();
     console.log(clickedButton);
-    console.log(icecreamQuestion[0].correctAnswer);
-
-    if (clickedButton == icecreamQuestion[0].correctAnswer) {
+    console.log(icecreamQuestion[currentQ].correctAnswer);
+    console.log("clicked button: " + clickedButton);
+    if (clickedButton == icecreamQuestion[currentQ].correctAnswer) {
       //stop timer
-      clearInterval(timer);
+      var stopTimer = clearInterval(timer);
       //hide timer
-      $('#timer').addClass('hide');
+      var hideTimer = $('#timer').addClass('hide');
       //change screen to say "You are correct!"
       $('#question').html(
         "You are correct!");
       
         //load next question after 3 seconds
-      setInterval(function() {
-        var loadNextQuestion = 
+      setTimeout( function() {
+        if (currentQ != icecreamQuestion.length) {
+          currentQ++;
+        }
       }, 3000);
+      loadQuestion;
+      console.log(currentQ);
+    }
+    else {
+      stopTimer;
+      hideTimer;
+      //change screen to say "Wrong!"
+      $('#question').html(
+        "Wrong!");
+
     }
   });
-});
 
 var icecreamQuestion = [{
     question:"What year was the ice cream cone invented?",
