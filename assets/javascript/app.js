@@ -1,9 +1,12 @@
 //on page load have start button visible
+var timer
+//on start button click load first question and answer array, begin timer
 $("#start").click( function(){
   var counter = 20;
   var seconds = Math.floor((counter % (1000 * 60)) / 1000);
 
-  var timer = setInterval(function() {
+  //load timer
+  timer = setInterval(function() {
     counter--;
      if (counter >= 0) {
         span = document.getElementById("timer");
