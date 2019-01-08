@@ -21,50 +21,50 @@ $("#start").click( function(){
   loadQuestion(); 
   });
 
-  //call question and answer array to appear
-  var currentQ = 0
+//call question and answer array to appear
+var currentQ = 0
+var loadQuestion = function () {
+  $('#question').html(icecreamQuestion[currentQ].question) 
+  for(var i=0; i < icecreamQuestion[0].choices.length ; i++) {
+    $('#answer' + i).html(icecreamQuestion[currentQ].choices[i])
+  console.log("test")
+  }
+};
 
-  var loadQuestion = function () {
-    $('#question').html(icecreamQuestion[currentQ].question) 
-    for(var i=0; i < icecreamQuestion[0].choices.length ; i++) {
-      $('#answer' + i).html(icecreamQuestion[currentQ].choices[i])
-    console.log("test")
+//listen for answer selection and alert appropriate response
+$("button[id^='answer']").click(function() {
+  var clickedButton = $(this).val();
+  console.log(clickedButton);
+  console.log(icecreamQuestion[currentQ].correctAnswer);
+  console.log("clicked button: " + clickedButton);
+  if (clickedButton == icecreamQuestion[currentQ].correctAnswer) {
+    //stop timer
+    var stopTimer = clearInterval(timer);
+    //hide timer
+    var hideTimer = $('#timer').addClass('hide');
+    //change screen to say "You are correct!"
+    $('#question').html(
+      "You are correct!");
+    
+    //load next question after 3 seconds
+    setTimeout( function() {
+      if (currentQ != icecreamQuestion.length) {
+        currentQ++;
+      };
+      loadQuestion();
     }
-  };
-
-  //listen for answer selection and alert appropriate response
-  $("button[id^='answer']").click(function() {
-    var clickedButton = $(this).val();
-    console.log(clickedButton);
-    console.log(icecreamQuestion[currentQ].correctAnswer);
-    console.log("clicked button: " + clickedButton);
-    if (clickedButton == icecreamQuestion[currentQ].correctAnswer) {
-      //stop timer
-      var stopTimer = clearInterval(timer);
-      //hide timer
-      var hideTimer = $('#timer').addClass('hide');
-      //change screen to say "You are correct!"
-      $('#question').html(
-        "You are correct!");
-      
-        //load next question after 3 seconds
-      setTimeout( function() {
-        if (currentQ != icecreamQuestion.length) {
-          currentQ++;
-        }
-      }, 3000);
-      loadQuestion;
-      console.log(currentQ);
-    }
-    else {
-      stopTimer;
-      hideTimer;
-      //change screen to say "Wrong!"
-      $('#question').html(
-        "Wrong!");
-
-    }
-  });
+    , 3000);
+    console.log(currentQ);
+  }
+  else {
+    stopTimer;
+    hideTimer;
+    //change screen to say "Wrong!"
+    $('#question').html(
+      "Wrong!");
+    loadQuestion();
+  }
+});
 
 var icecreamQuestion = [{
     question:"What year was the ice cream cone invented?",
@@ -96,10 +96,5 @@ var icecreamQuestion = [{
     choices:["Cream Cheese", "Yogurt", "Mashed Potatoes", "Play-Doh"],
     correctAnswer: 2
 }]
-//if correct answer is clicked alert "correct!" plus gif for three seconds before next question appears
-
-//if incorrect answer is clicked alert "wrong!" plus gif for three seconds before next question appears
-
-//if time expires alert "time's up" plus gif for three seconds before next question appears
 
 //once final question has been answered alert with score for three seconds before returning to start button
