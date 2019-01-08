@@ -27,7 +27,10 @@ var loadQuestion = function () {
   $('#question').html(icecreamQuestion[currentQ].question) 
   for(var i=0; i < icecreamQuestion[0].choices.length ; i++) {
     $('#answer' + i).html(icecreamQuestion[currentQ].choices[i])
-  console.log("test")
+  console.log("test");
+  //un-hide answer array
+  $('#answerButtons').removeClass('hide');
+
   }
 };
 
@@ -39,9 +42,11 @@ $("button[id^='answer']").click(function() {
   console.log("clicked button: " + clickedButton);
   if (clickedButton == icecreamQuestion[currentQ].correctAnswer) {
     //stop timer
-    var stopTimer = clearInterval(timer);
+    clearInterval(timer);
     //hide timer
-    var hideTimer = $('#timer').addClass('hide');
+    $('#timer').addClass('hide');
+    //hide answer array
+    $('#answerButtons').addClass('hide');
     //change screen to say "You are correct!"
     $('#question').html(
       "You are correct!");
@@ -57,8 +62,8 @@ $("button[id^='answer']").click(function() {
     console.log(currentQ);
   }
   else {
-    stopTimer;
-    hideTimer;
+    clearInterval(timer);
+    $('#timer').addClass('hide');
     //change screen to say "Wrong!"
     $('#question').html(
       "Wrong!");
