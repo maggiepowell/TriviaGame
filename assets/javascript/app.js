@@ -2,6 +2,16 @@
 var timer
 //on start button click load first question and answer array, begin timer
 $("#start").click( function(){
+  //hide start button once clicked
+  $('#start').addClass('hide');
+
+  //call question and answer array to appear
+  loadQuestion(); 
+  });
+
+//call question and answer array to appear
+var currentQ = 0
+var loadQuestion = function () {
   var counter = 20;
   var seconds = Math.floor((counter % (1000 * 60)) / 1000);
 
@@ -17,23 +27,14 @@ $("#start").click( function(){
         clearInterval(counter);
       }
     }, 1000);
-  //hide start button once clicked
-  $('#start').addClass('hide');
-
-  //call question and answer array to appear
-  loadQuestion(); 
-  });
-
-//call question and answer array to appear
-var currentQ = 0
-var loadQuestion = function () {
   $('#question').html(icecreamQuestion[currentQ].question) 
   for(var i=0; i < icecreamQuestion[0].choices.length ; i++) {
     $('#answer' + i).html(icecreamQuestion[currentQ].choices[i])
   console.log("test");
   //un-hide answer array
   $('#answerButtons').removeClass('hide');
-
+  //un-hide timer
+  $('#timer').removeClass('hide');
   }
 };
 
