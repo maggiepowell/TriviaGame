@@ -1,5 +1,6 @@
 //on page load have start button visible
 var timer
+var score = 0
 //on start button click load first question and answer array, begin timer
 $("#start").click( function(){
   //hide start button once clicked
@@ -56,7 +57,8 @@ $("button[id^='answer']").click(function() {
     //change screen to say "You are correct!"
     $('#question').html(
       "You are correct!");
-    
+    //update score
+    score++;
     //load next question after two seconds
     setTimeout( function() {
       if (currentQ != icecreamQuestion.length) {
@@ -82,9 +84,14 @@ $("button[id^='answer']").click(function() {
     setTimeout( function() {
       if (currentQ != icecreamQuestion.length) {
         currentQ++;
-      };
-      loadQuestion();
+        loadQuestion();  
+      }
+      else if (currentQ == icecreamQuestion.length) {
+        $('#score').html("Game Over! You answered " + score + "questions correctly!")
+      }
+      
     }
+    
     , 2000);
     console.log(currentQ);
   }
@@ -121,4 +128,4 @@ var icecreamQuestion = [{
     correctAnswer: 2
 }]
 
-//once final question has been answered alert with score for three seconds before returning to start button
+//once final question has been answered show score and start button
