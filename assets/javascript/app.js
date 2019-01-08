@@ -12,7 +12,7 @@ $("#start").click( function(){
 //call question and answer array to appear
 var currentQ = 0
 var loadQuestion = function () {
-  var counter = 20;
+  var counter = 12;
   var seconds = Math.floor((counter % (1000 * 60)) / 1000);
 
   //load timer
@@ -28,11 +28,13 @@ var loadQuestion = function () {
       }
     }, 1000);
   $('#question').html(icecreamQuestion[currentQ].question) 
-  for(var i=0; i < icecreamQuestion[0].choices.length ; i++) {
+    for(var i=0; i < icecreamQuestion[0].choices.length ; i++) {
     $('#answer' + i).html(icecreamQuestion[currentQ].choices[i])
   console.log("test");
+
   //un-hide answer array
   $('#answerButtons').removeClass('hide');
+
   //un-hide timer
   $('#timer').removeClass('hide');
   }
@@ -55,23 +57,36 @@ $("button[id^='answer']").click(function() {
     $('#question').html(
       "You are correct!");
     
-    //load next question after 3 seconds
+    //load next question after two seconds
     setTimeout( function() {
       if (currentQ != icecreamQuestion.length) {
         currentQ++;
       };
       loadQuestion();
     }
-    , 3000);
+    , 2000);
     console.log(currentQ);
   }
   else {
+    console.log("test else");
+    //stop timer
     clearInterval(timer);
+    //hide timer
     $('#timer').addClass('hide');
+    //hide answer array
+    $('#answerButtons').addClass('hide');
     //change screen to say "Wrong!"
     $('#question').html(
       "Wrong!");
-    loadQuestion();
+    //load next question after two seconds
+    setTimeout( function() {
+      if (currentQ != icecreamQuestion.length) {
+        currentQ++;
+      };
+      loadQuestion();
+    }
+    , 2000);
+    console.log(currentQ);
   }
 });
 
