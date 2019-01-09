@@ -46,6 +46,7 @@ $("button[id^='answer']").click(function() {
   var clickedButton = $(this).val();
   console.log("correct answer: " + icecreamQuestion[currentQ].correctAnswer);
   console.log("clicked button: " + clickedButton);
+
   //correct answer clicked:
   if (clickedButton == icecreamQuestion[currentQ].correctAnswer) {
     //stop timer
@@ -61,11 +62,21 @@ $("button[id^='answer']").click(function() {
     score++;
     //load next question after two seconds
     setTimeout( function() {
-      if (currentQ != icecreamQuestion.length) {
+      if (currentQ != icecreamQuestion.length-1) {
         currentQ++;
-      };
-      loadQuestion();
+        loadQuestion();  
+        console.log("test else");
+      }
+      else if (currentQ == icecreamQuestion.length-1) {
+        $('#score').html("Game Over! You answered " + score + " questions correctly!");
+        clearInterval(timer);
+        //un-hide start button
+        $('#start').removeClass('hide');
+
+        console.log("test else");
+      }
     }
+    
     , 2000);
     console.log("current question: " + currentQ);
   }
@@ -84,16 +95,18 @@ $("button[id^='answer']").click(function() {
     //load next question after two seconds
     console.log("questions: " + icecreamQuestion.length);
     setTimeout( function() {
-      if (currentQ != icecreamQuestion.length) {
+      if (currentQ != icecreamQuestion.length-1) {
         currentQ++;
         loadQuestion();  
         console.log("test else");
       }
-      else if (currentQ == icecreamQuestion.length) {
-        $('#score').html("Game Over! You answered " + score + "questions correctly!");
+      else if (currentQ == icecreamQuestion.length-1) {
+        $('#score').html("Game Over! You answered " + score + " questions correctly!");
         clearInterval(timer);
-        console.log("test else");
+        //un-hide start button
+        $('#start').removeClass('hide');
 
+        console.log("test else");
       }
       
     }
@@ -134,4 +147,3 @@ var icecreamQuestion = [{
     correctAnswer: 2
 }]
 
-//once final question has been answered show score and start button to begin again
