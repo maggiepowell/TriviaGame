@@ -44,9 +44,9 @@ var loadQuestion = function () {
 //listen for answer selection and alert appropriate response
 $("button[id^='answer']").click(function() {
   var clickedButton = $(this).val();
-  console.log(clickedButton);
-  console.log(icecreamQuestion[currentQ].correctAnswer);
+  console.log("correct answer: " + icecreamQuestion[currentQ].correctAnswer);
   console.log("clicked button: " + clickedButton);
+  //correct answer clicked:
   if (clickedButton == icecreamQuestion[currentQ].correctAnswer) {
     //stop timer
     clearInterval(timer);
@@ -67,8 +67,9 @@ $("button[id^='answer']").click(function() {
       loadQuestion();
     }
     , 2000);
-    console.log(currentQ);
+    console.log("current question: " + currentQ);
   }
+  //wrong answer clicked:
   else {
     console.log("test else");
     //stop timer
@@ -81,13 +82,18 @@ $("button[id^='answer']").click(function() {
     $('#question').html(
       "Wrong!");
     //load next question after two seconds
+    console.log("questions: " + icecreamQuestion.length);
     setTimeout( function() {
       if (currentQ != icecreamQuestion.length) {
         currentQ++;
         loadQuestion();  
+        console.log("test else");
       }
       else if (currentQ == icecreamQuestion.length) {
-        $('#score').html("Game Over! You answered " + score + "questions correctly!")
+        $('#score').html("Game Over! You answered " + score + "questions correctly!");
+        clearInterval(timer);
+        console.log("test else");
+
       }
       
     }
@@ -128,4 +134,4 @@ var icecreamQuestion = [{
     correctAnswer: 2
 }]
 
-//once final question has been answered show score and start button
+//once final question has been answered show score and start button to begin again
